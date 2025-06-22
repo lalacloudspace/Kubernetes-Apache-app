@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-app-deployment
+  labels:
+    app: apache
+spec:
+  replicas: 5   # We need 5 pods running at all time
+  selector:
+    matchLabels:  # filter to select the specified labor/tag (pod) you wannt to manage.
+      app: apache
+  template:  # This is where you have your pods specified.
+    metadata:
+      labels:   # label we set for the POD
+        app: apache
+    spec:
+      containers:
+      - name: apache-app
+        image: lalaaicha422/docker-jenkins-integration:v13
+        ports:
+        - containerPort: 80
